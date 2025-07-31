@@ -3,3 +3,8 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 @import 'aos/dist/aos.css';
+
+html {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
