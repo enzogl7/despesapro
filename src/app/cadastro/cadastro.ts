@@ -1,43 +1,43 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService, LoginRequest } from '../services/auth-service';
+import { AuthService, RegisterRequest } from '../services/auth-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-cadastro',
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './login.html',
-  styleUrl: './login.css'
+  templateUrl: './cadastro.html',
+  styleUrl: './cadastro.css'
 })
-export class Login {
+export class Cadastro {
   form: FormGroup;
-  loginIncorreto: boolean = false;
+  jaCadastrado: boolean = false;
   erroServidor: boolean = false;
-  cadastrado: boolean | null = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = this.fb.group({
+      nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required]
     });
-    const navigation = this.router.getCurrentNavigation();
-    this.cadastrado = navigation?.extras?.state?.['cadastrado'] ?? null;
   }
 
-  logar() {
+  cadastrar() {
     if (this.form.valid) {
-      const dados: LoginRequest = this.form.value;
+      const dados: RegisterRequest = {...this.form.value, role: 'USER'};
 
-      this.authService.logar(dados).subscribe({
+      this.authService.cadastrar(dados).subscribe({
         next: (response) => {
-          this.router.navigate(['/home/gestor']);
+          this.router.navigate(['/login'], {
+            state: { cadastrado: true }
+          });
         },
         error: (erro) => {
           switch (erro.status) {
-            case 403:
-              this.loginIncorreto = true;
+            case 400:
+              this.jaCadastrado = true;
               break;
             default:
               this.erroServidor = true;
@@ -47,4 +47,5 @@ export class Login {
       });
     }
   }
+
 }
