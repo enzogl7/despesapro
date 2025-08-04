@@ -32,7 +32,11 @@ export class Login {
 
       this.authService.logar(dados).subscribe({
         next: (response) => {
-          this.router.navigate(['/gestor/home']);
+          if (response.role === 'ADMIN') {
+            this.router.navigate(['/gestor/home']);
+          } else {
+            this.router.navigate(['/colab/home']);
+          }
         },
         error: (erro) => {
           switch (erro.status) {
