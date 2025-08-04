@@ -8,5 +8,5 @@ export const routes: Routes = [
     { path: '', component: Landingpage },
     { path: 'login', component: Login},
     { path: 'cadastro', component: Cadastro },
-    { path: 'home/gestor', component: HomeGestor }
+    { path: 'gestor/home', component: HomeGestor }
 ];

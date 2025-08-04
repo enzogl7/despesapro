@@ -32,7 +32,7 @@ export class Login {
 
       this.authService.logar(dados).subscribe({
         next: (response) => {
-          this.router.navigate(['/home/gestor']);
+          this.router.navigate(['/gestor/home']);
         },
         error: (erro) => {
           switch (erro.status) {
