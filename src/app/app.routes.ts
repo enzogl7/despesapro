@@ -5,12 +5,20 @@ import { Cadastro } from './cadastro/cadastro';
 import { HomeGestor } from './home-gestor/home-gestor';
 import { HomeColaborador } from './home-colaborador/home-colaborador';
 import { Colaboradores } from './colaboradores/colaboradores';
+import { Gestor } from './layouts/gestor/gestor'
 
 export const routes: Routes = [
-    { path: '', component: Landingpage },
-    { path: 'login', component: Login},
-    { path: 'cadastro', component: Cadastro },
-    { path: 'gestor/home', component: HomeGestor },
-    { path: 'gestor/colaboradores', component: Colaboradores },
-    { path: 'colab/home', component: HomeColaborador }
+  { path: '', component: Landingpage },
+  { path: 'login', component: Login },
+  { path: 'cadastro', component: Cadastro },
+
+  {
+    path: 'gestor',
+    component: Gestor,
+    children: [
+      { path: 'home', component: HomeGestor },
+      { path: 'colaboradores', component: Colaboradores },
+    ]
+  }
 ];
+
