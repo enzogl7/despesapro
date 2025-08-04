@@ -3,9 +3,7 @@
 # DespesaPro - Frontend
 
 Projeto frontend desenvolvido em Angular para o sistema DespesaPro, focado em gestão de despesas de viagens corporativas.
-
-# DespesaPro - Backend
-
+<br>
 Visite o backend do projeto <a href="https://github.com/enzogl7/despesapro-api">aqui</a>
 
 ---
