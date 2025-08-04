@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { faUsers, faPlaneDeparture, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
-import { RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-gestor',

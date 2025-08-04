@@ -1,0 +1,152 @@
+<div class="flex items-center justify-between">
+  <div>
+    <h1 class="font-medium text-2xl">
+      <fa-icon aria-hidden="true" [icon]="faPlaneDeparture"></fa-icon> Viagens
+    </h1>
+    <p class="text-gray-400 text-sm">Visualize viagens, gastos e aprovações de seus colaboradores</p>
+  </div>
+  <button data-modal-target="convidar-modal" data-modal-toggle="convidar-modal" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow transition cursor-pointer">
+     <fa-icon aria-hidden="true" [icon]="faCalendar"></fa-icon> Nova viagem
+  </button>
+</div>
+
+<hr class="mt-2 border-t border-gray-400" />
+
+<div class="flex flex-wrap gap-4 mt-4">
+
+  <div class="flex-1 p-4 bg-white border border-gray-200 rounded-lg shadow flex items-center">
+    <div>
+        <h3 class="font-medium text-gray-500">Total gasto</h3>
+        <p class="mt-1 text-2xl font-semibold text-gray-900">R$ 12.450,00</p>
+        <p class="text-sm text-gray-400">Valores de viagens aprovadas</p>
+    </div>
+    <div class="ml-auto w-12 h-12 flex items-center justify-center rounded-md bg-gray-100">
+        <fa-icon [icon]="faMoneyBills" class="text-gray-600 text-xl"></fa-icon>
+    </div>
+  </div>
+
+    <div class="flex-1 p-4 bg-white border border-gray-200 rounded-lg shadow flex items-center">
+        <div>
+            <h3 class="font-medium text-gray-500">Total de viagens</h3>
+            <p class="mt-1 text-2xl font-semibold text-gray-900">12</p>
+        </div>
+        <div class="ml-auto w-12 h-12 flex items-center justify-center rounded-md bg-gray-100">
+            <fa-icon [icon]="faPlane" class="text-gray-600 text-xl"></fa-icon>
+        </div>
+    </div>
+
+
+    <div class="flex-1 p-4 bg-white border border-gray-200 rounded-lg shadow flex items-center">
+        <div>
+            <h3 class="font-medium text-gray-500">Viagens Ativas</h3>
+            <p class="mt-1 text-2xl font-semibold text-gray-900">3</p>
+        </div>
+        <div class="ml-auto w-12 h-12 flex items-center justify-center rounded-md bg-gray-100">
+            <fa-icon [icon]="faCircleCheck" class="text-gray-600 text-xl"></fa-icon>
+        </div>
+    </div>
+
+  <div class="flex-1 p-4 bg-white border border-gray-200 rounded-lg shadow flex items-center">
+    <div>
+        <h3 class="font-medium text-gray-500">Média por viagem</h3>
+        <p class="mt-1 text-2xl font-semibold text-gray-900">R$ 1.480,00</p>
+    </div>
+    <div class="ml-auto w-12 h-12 flex items-center justify-center rounded-md bg-gray-100">
+        <fa-icon [icon]="faChartSimple" class="text-gray-600 text-xl"></fa-icon>
+    </div>
+    </div>
+</div>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100 ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Colaborador
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Destino
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Período
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Motivo
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Valor total
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Valor aprovado
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-gray-250 border-b border-gray-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    Wallace Lima
+                </th>
+                <td class="px-6 py-4">
+                    Ribeirão Preto -> Belo Horizonte
+                </td>
+                <td class="px-6 py-4">
+                    01/08/2025 - 08/08/2025
+                </td>
+                <td class="px-6 py-4">
+                    Apresentação de projeto
+                </td>
+                <td class="px-6 py-4">
+                    Aprovada
+                </td>
+                <td class="px-6 py-4">
+                    R$ 1218,65
+                </td>
+                <td class="px-6 py-4">
+                    R$ 1218,65
+                </td>
+                <td class="px-6 py-4  text-xl">
+                    <fa-icon class="mr-3 text-blue-950" aria-hidden="true" [icon]="faPenToSquare"></fa-icon>
+                    <fa-icon class="text-red-800" aria-hidden="true" [icon]="faTrash"></fa-icon>
+                </td>
+            </tr>
+            <tr class="bg-gray-250 border-b border-gray-200">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    Enzo Lima
+                </th>
+                <td class="px-6 py-4">
+                    Ribeirão Preto -> São Paulo
+                </td>
+                <td class="px-6 py-4">
+                    01/08/2025 - 08/08/2025
+                </td>
+                <td class="px-6 py-4">
+                    Implantação
+                </td>
+                <td class="px-6 py-4">
+                    Pendente
+                </td>
+                <td class="px-6 py-4">
+                    R$ 2680,65
+                </td>
+                <td class="px-6 py-4">
+                    -
+                </td>
+                <td class="px-6 py-4  text-xl">
+                    <fa-icon class="mr-3 text-blue-950" aria-hidden="true" [icon]="faPenToSquare"></fa-icon>
+                    <fa-icon class="text-red-800" aria-hidden="true" [icon]="faTrash"></fa-icon>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

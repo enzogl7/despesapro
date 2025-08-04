@@ -6,6 +6,7 @@ import { HomeGestor } from './home-gestor/home-gestor';
 import { HomeColaborador } from './home-colaborador/home-colaborador';
 import { Colaboradores } from './colaboradores/colaboradores';
 import { Gestor } from './layouts/gestor/gestor'
+import { Viagens } from './viagens/viagens';
 
 export const routes: Routes = [
   { path: '', component: Landingpage },
@@ -18,6 +19,7 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomeGestor },
       { path: 'colaboradores', component: Colaboradores },
+      { path: 'viagens', component: Viagens }
     ]
   }
 ];
