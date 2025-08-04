@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUsers, faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faPlaneDeparture, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home-gestor',
@@ -12,5 +12,7 @@ export class HomeGestor {
 
   faUsers = faUsers;
   faPlaneDeparture = faPlaneDeparture;
+  faRightFromBracket = faRightFromBracket;
+  faUser = faUser;
 
 }
