@@ -7,12 +7,15 @@ import { CommonModule } from '@angular/common';
 import { ColaboradoresService, ConviteRequest } from '../services/colaboradores-service';
 @Component({
   selector: 'app-colaboradores',
-  imports: [FontAwesomeModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, ReactiveFormsModule, CommonModule],
   templateUrl: './colaboradores.html',
   styleUrl: './colaboradores.css'
 })
 export class Colaboradores {
   form: FormGroup;
+  convite: string = "";
+  gestorNaoEncontrado: boolean = false;
+  erroInterno: boolean = false;
 
   constructor(private fb: FormBuilder, private colaboradoresService: ColaboradoresService) {
     this.form = this.fb.group({
@@ -27,19 +30,24 @@ export class Colaboradores {
 
     this.colaboradoresService.gerarConviteColaborador(dados).subscribe({
         next: (response) => {
-          console.log(response)
+          this.erroInterno = false;
+          this.gestorNaoEncontrado = false;
+          this.convite = response.token;
         },
         error: (erro) => {
+          this.convite = "";
+          this.erroInterno = false;
           switch (erro.status) {
+            case 400:
+              this.gestorNaoEncontrado = true;
+              break;
             default:
+              this.erroInterno = true;
               console.error('Erro:', erro);
           }
         }
       });
   }
-
-  
-
 
   faUsers = faUsers;
   faPenToSquare = faPenToSquare;

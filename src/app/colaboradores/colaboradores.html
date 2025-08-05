@@ -106,6 +106,17 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
+            <div *ngIf="convite" class="p-4 mt-2 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+                <span class="font-medium">Convite criado!</span> Peça para que seu colaborador verifique seu email ou envie o link:
+                <br>
+                <p>{{ convite }}</p>
+            </div>
+            <div *ngIf="gestorNaoEncontrado" class="p-4 mt-2 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                <span class="font-medium">Ops!</span> Gestor não encontrado com o email informado.
+            </div>
+            <div *ngIf="erroInterno" class="p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                <span class="font-medium">Erro!</span> Ocorreu um erro interno na requisição. Tente novamente mais tarde.
+            </div>
             <form class="p-4 md:p-5" [formGroup]="form" (ngSubmit)="gerarConvite()">
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">

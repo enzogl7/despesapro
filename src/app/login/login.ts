@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, LoginRequest } from '../services/auth-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class Login {
   erroServidor: boolean = false;
   cadastrado: boolean | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private route : ActivatedRoute) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required]
@@ -29,7 +29,7 @@ export class Login {
   logar() {
     if (this.form.valid) {
       const dados: LoginRequest = this.form.value;
-
+      localStorage.removeItem("token")
       this.authService.logar(dados).subscribe({
         next: (response) => {
           if (response.role === 'ADMIN') {

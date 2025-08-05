@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlaneDeparture, faFolder, faChartColumn, faUser, faPaperPlane, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPlaneDeparture, faFolder, faChartColumn, faUser, faPaperPlane, faCheck, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,6 +17,7 @@ export class Landingpage {
   faUser = faUser
   faPaperPlane = faPaperPlane
   faCheck = faCheck
+  faPenToSquare = faPenToSquare
   menuAberto = false;
 
   toggleMenu() {

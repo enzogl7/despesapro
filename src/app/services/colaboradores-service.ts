@@ -12,12 +12,13 @@ export interface ConviteRequest {
   providedIn: 'root'
 })
 export class ColaboradoresService {
-    private readonly API_URL = 'http://localhost:8080/api/gestor/colaborador';  
+  private readonly API_URL = 'http://localhost:8080/api/gestor/colaborador';  
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-    gerarConviteColaborador(dados: ConviteRequest) : Observable<any> {
-        return this.http.post(`${this.API_URL}/gerar-convite`, dados)
-    }
+  gerarConviteColaborador(dados: ConviteRequest): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.API_URL}/gerar-convite`, dados);
+  }
+
   
 }
