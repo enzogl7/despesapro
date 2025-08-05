@@ -33,6 +33,7 @@ export class Login {
       this.authService.logar(dados).subscribe({
         next: (response) => {
           if (response.role === 'ADMIN') {
+            localStorage.setItem('token', response.token);
             this.router.navigate(['/gestor/home']);
           } else {
             this.router.navigate(['/colab/home']);
