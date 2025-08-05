@@ -109,10 +109,18 @@
             <div *ngIf="convite" class="p-4 mt-2 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
                 <span class="font-medium">Convite criado!</span> Peça para que seu colaborador verifique seu email ou envie o link:
                 <br>
-                <p>{{ convite }}</p>
+                <div class="flex items-center space-x-2 mt-1 relative">
+                    <p class="m-0">{{ convite.length > 35 ? convite.substring(0, 35) + '...' : convite }}</p>
+                    <fa-icon data-tooltip-target="tooltip-click" data-tooltip-trigger="click" class="text-blue-950 ml-2 cursor-pointer" [icon]="faCopy" (click)="copiarConvite()"></fa-icon>
+                    <div id="tooltip-click" role="tooltip" class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip">
+                        Link copiado
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="gestorNaoEncontrado" class="p-4 mt-2 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
-                <span class="font-medium">Ops!</span> Gestor não encontrado com o email informado.
+
+            <div *ngIf="warn" class="p-4 mt-2 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                <span class="font-medium">Ops!</span> {{ mensagemWarn }}
             </div>
             <div *ngIf="erroInterno" class="p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
                 <span class="font-medium">Erro!</span> Ocorreu um erro interno na requisição. Tente novamente mais tarde.
@@ -122,10 +130,6 @@
                     <div class="col-span-2">
                         <label for="emailGestor" class="block mb-2 text-sm font-medium">Seu email</label>
                         <input type="email" name="emailGestor" formControlName="emailGestor"  id="emailGestor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Insira o seu email cadastrado no DespesaPro" required="">
-                    </div>
-                    <div class="col-span-2">
-                        <label for="nomeColaborador" class="block mb-2 text-sm font-medium">Nome do colaborador</label>
-                        <input type="text" name="nomeColaborador" formControlName="nomeColaborador" id="nomeColaborador" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Insira o nome do colaborador a ser convidado" required="">
                     </div>
                     <div class="col-span-2">
                         <label for="emailColaborador" class="block mb-2 text-sm font-medium">Email do colaborador</label>

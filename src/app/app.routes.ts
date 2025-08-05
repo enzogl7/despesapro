@@ -7,11 +7,13 @@ import { HomeColaborador } from './home-colaborador/home-colaborador';
 import { Colaboradores } from './colaboradores/colaboradores';
 import { Gestor } from './layouts/gestor/gestor'
 import { Viagens } from './viagens/viagens';
+import { AceitarConvite } from './aceitar-convite/aceitar-convite';
 
 export const routes: Routes = [
   { path: '', component: Landingpage },
   { path: 'login', component: Login },
   { path: 'cadastro', component: Cadastro },
+  { path: 'convite/aceitar/:token', component: AceitarConvite },
 
   {
     path: 'gestor',
