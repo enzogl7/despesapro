@@ -1,13 +1,63 @@
 <div class="bg-gray-50 min-h-screen pb-16">
-    <div class="flex justify-center p-6 bg-gray-50">
+    <!-- CARD ERRO GERAL-->
+    <div *ngIf="erroInterno" class="flex justify-center p-6 bg-gray-50">
+        <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
+
+        <div class="bg-red-100 border border-red-300 rounded-full p-4 mb-4">
+            <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 9v3m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4a2 2 0 00-3.464 0L4.34 17c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+
+        <h2 class="text-2xl font-bold text-red-700 text-center mb-2">Erro interno</h2>
+
+        <p class="text-center text-gray-700 mb-6 max-w-md">
+            Ocorreu um erro interno ao tentar obter informações do convite.
+            Tente novamente mais tarde.
+        </p>
+
+        <a href="/" class="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2 font-semibold transition">
+            Voltar para a página inicial
+        </a>
+
+        </div>
+    </div>
+
+    <!-- CARD WARN DINAMICO -->
+    <div *ngIf="warn" class="flex justify-center p-6 bg-gray-50">
+        <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
+
+        <div class="bg-yellow-100 border border-yellow-300 rounded-full p-4 mb-4">
+            <svg class="w-12 h-12 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 9v3m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4a2 2 0 00-3.464 0L4.34 17c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+
+        <h2 class="text-2xl font-bold text-yellow-700 text-center mb-2">Ops!</h2>
+
+        <p class="text-center text-gray-700 mb-6 max-w-md">
+            {{ mensagemWarn }}
+        </p>
+
+        <a href="/" class="bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg px-6 py-2 font-semibold transition">
+            Voltar para a página inicial
+        </a>
+
+        </div>
+    </div>    
+
+    <!-- CARD CONVITE -->
+    <div *ngIf="!warn && !erroInterno" class="flex justify-center p-6 bg-gray-50">
     <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col justify-between">
 
         <div>
         <h2 class="text-2xl font-bold text-gray-800 text-center">Aceitar Convite</h2>
-        <p class="text-center mb-4">João silva lhe convidou para seu time no DespesaPro!</p>
+        <p class="text-center mb-4"><strong>{{ conviteObj.nomeGestor }}</strong> lhe convidou para seu time no DespesaPro!</p>
 
         <div class="bg-blue-50 border border-blue-300 rounded-lg p-4 text-blue-700 text-center mb-4">
-            Convite válido até: <strong>10 de Agosto de 2025</strong>
+            Convite válido até: <strong>{{ conviteObj.expiraEm | date:'dd \'de\' MMMM \'de\' yyyy' }}</strong>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4 text-gray-700 mb-6">
@@ -15,15 +65,15 @@
             <div class="flex-1 bg-gray-100 rounded-lg p-4 shadow-inner text-center">
                 <img src="/user.png" alt="Foto do Gestor" class="w-16 h-16 rounded-full mx-auto mb-3" />
                 <h3 class="text-lg font-semibold mb-2">Perfil do Gestor</h3>
-                <p><strong>Nome:</strong> João Silva</p>
-                <p><strong>Email:</strong> joao.silva@empresa.com</p>
+                <p><strong>Nome:</strong> {{ conviteObj.nomeGestor }}</p>
+                <p><strong>Email:</strong> {{ conviteObj.emailGestor }}</p>
             </div>
 
             <div class="flex-1 bg-gray-100 rounded-lg p-4 shadow-inner text-center">
             <img src="/user.png" alt="Foto do Gestor" class="w-16 h-16 rounded-full mx-auto mb-3" />
             <h3 class="text-lg font-semibold mb-2 text-center">Seu Perfil</h3>
-            <p><strong>Nome:</strong> Maria Souza</p>
-            <p><strong>Email:</strong> maria.souza@email.com</p>
+            <p><strong>Nome:</strong> {{ conviteObj.nomeColaborador }}</p>
+            <p><strong>Email:</strong> {{ conviteObj.emailColaborador }}</p>
             <p><strong>Cargo:</strong> Desenvolvedor(a)</p>
             <p><strong>Gestor atual:</strong> Nenhum</p>
             </div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 export interface ConviteRequest {
   emailGestor: string;
@@ -12,8 +13,8 @@ export interface ConviteRequest {
   providedIn: 'root'
 })
 export class ColaboradoresService {
-  private readonly API_URL = 'http://localhost:8080/api/gestor/colaborador';  
-
+  private readonly API_URL = environment.apiUrl + '/gestor/colaborador';  
+  
   constructor(private http: HttpClient) {}
 
   gerarConviteColaborador(dados: ConviteRequest): Observable<{ token: string }> {
