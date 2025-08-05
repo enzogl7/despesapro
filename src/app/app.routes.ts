@@ -23,6 +23,13 @@ export const routes: Routes = [
       { path: 'colaboradores', component: Colaboradores },
       { path: 'viagens', component: Viagens }
     ]
+  },
+
+  {
+    path: 'colab',
+    children: [
+      { path: 'home', component: HomeColaborador}
+    ]
   }
 ];
 

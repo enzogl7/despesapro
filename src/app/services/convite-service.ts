@@ -14,4 +14,12 @@ export class ConviteService {
   validarConvite(token: string): Observable<any> {
     return this.http.get<any>(`${this.API_URL}/validar/${token}`);
   }
+
+  aceitarConvite(token: string): Observable<any> {
+    return this.http.put<any>(`${this.API_URL}/aceitar/${token}`, {});
+  }
+
+  recusarConvite(token: string): Observable<any> {
+    return this.http.put<any>(`${this.API_URL}/recusar/${token}`, {});
+  }
 }

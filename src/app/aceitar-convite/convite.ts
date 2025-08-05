@@ -3,6 +3,7 @@ export class Convite {
   emailGestor: string = "";
   nomeColaborador: string = "";
   emailColaborador: string = "";
+  gestorAtualColaborador: string = "";
   expiraEm: string = "";
 }
 

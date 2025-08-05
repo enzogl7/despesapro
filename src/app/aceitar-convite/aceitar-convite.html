@@ -4,10 +4,9 @@
         <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
 
         <div class="bg-red-100 border border-red-300 rounded-full p-4 mb-4">
-            <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 9v3m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4a2 2 0 00-3.464 0L4.34 17c-.77 1.333.192 3 1.732 3z" />
-            </svg>
+            <div class=" rounded-full p-2">
+                <fa-icon class="w-12 h-12 text-red-600 text-4xl" [icon]="faX"></fa-icon>
+            </div>
         </div>
 
         <h2 class="text-2xl font-bold text-red-700 text-center mb-2">Erro interno</h2>
@@ -48,8 +47,53 @@
         </div>
     </div>    
 
+    <!-- CARD CONVITE ACEITO -->
+    <div *ngIf="conviteAceito" class="flex justify-center p-6 bg-gray-50">
+        <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
+
+        <div class="bg-green-100 border border-green-300 rounded-full p-4 mb-4">
+            <fa-icon class="w-12 h-12 text-green-600 text-4xl" [icon]="faCheckCircle"></fa-icon>
+        </div>
+
+        <h2 class="text-2xl font-bold text-green-700 text-center mb-2">Sucesso!</h2>
+
+        <p class="text-center text-gray-700 mb-6 max-w-md">
+            O convite foi aceito com sucesso e você já faz parte da equipe de {{ conviteObj.nomeGestor }}!
+        </p>
+
+        <a href="/colab/home" class="bg-green-600 hover:bg-green-700 text-white rounded-lg px-6 py-2 font-semibold transition">
+            Voltar para a página inicial
+        </a>
+
+        </div>
+    </div>  
+
+    <!-- CARD CONVITE RECUSADO -->
+    <div *ngIf="conviteRecusado" class="flex justify-center p-6 bg-gray-50">
+        <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col items-center">
+
+        <div class="bg-red-100 border border-red-300 rounded-full p-4 mb-4">
+            <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 9v3m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4a2 2 0 00-3.464 0L4.34 17c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+
+        <h2 class="text-2xl font-bold text-red-700 text-center mb-2">Recusado!</h2>
+
+        <p class="text-center text-gray-700 mb-6 max-w-md">
+            O convite foi recusado e você permanece na equipe do gestor: {{ conviteObj.gestorAtualColaborador != "" ? conviteObj.gestorAtualColaborador : "Nenhum" }}
+        </p>
+
+        <a href="/colab/home" class="bg-red-600 hover:bg-red-700 text-white rounded-lg px-6 py-2 font-semibold transition">
+            Voltar para a página inicial
+        </a>
+
+        </div>
+    </div>  
+
     <!-- CARD CONVITE -->
-    <div *ngIf="!warn && !erroInterno" class="flex justify-center p-6 bg-gray-50">
+    <div *ngIf="!warn && !erroInterno && !conviteAceito && !conviteRecusado" class="flex justify-center p-6 bg-gray-50">
     <div class="max-w-2xl bg-white rounded-xl shadow-md p-6 flex flex-col justify-between">
 
         <div>
@@ -75,7 +119,7 @@
             <p><strong>Nome:</strong> {{ conviteObj.nomeColaborador }}</p>
             <p><strong>Email:</strong> {{ conviteObj.emailColaborador }}</p>
             <p><strong>Cargo:</strong> Desenvolvedor(a)</p>
-            <p><strong>Gestor atual:</strong> Nenhum</p>
+            <p><strong>Gestor atual:</strong> {{ conviteObj.gestorAtualColaborador != "" ? conviteObj.gestorAtualColaborador : "Nenhum" }}</p>
             </div>
 
         </div>
@@ -83,10 +127,10 @@
 
         <div>
         <div class="flex justify-center space-x-4 mb-4">
-            <button class="bg-green-600 hover:bg-green-700 text-white rounded-lg px-5 py-2 font-semibold transition">
+            <button class="cursor-pointer bg-green-600 hover:bg-green-700 text-white rounded-lg px-5 py-2 font-semibold transition" (click)="aceitarConvite()">
             Aceitar
             </button>
-            <button class="bg-red-600 hover:bg-red-700 text-white rounded-lg px-5 py-2 font-semibold transition">
+            <button class="cursor-pointer bg-red-600 hover:bg-red-700 text-white rounded-lg px-5 py-2 font-semibold transition" (click)="recusarConvite()">
             Recusar
             </button>
         </div>
