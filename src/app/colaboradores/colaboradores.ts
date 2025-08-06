@@ -20,7 +20,14 @@ export class Colaboradores implements AfterViewInit {
   warn: boolean = false;
   erroInterno: boolean = false;
   mensagemWarn: string = "";
-
+  faUsers = faUsers;
+  faPenToSquare = faPenToSquare;
+  faTrash = faTrash;
+  faCheck = faCheck;
+  faX = faX;
+  faPaperPlane = faPaperPlane;
+  faCopy = faCopy;
+  
   ngAfterViewInit() {
     initTooltips();
   }
@@ -80,12 +87,5 @@ export class Colaboradores implements AfterViewInit {
     });
   }
 
-  faUsers = faUsers;
-  faPenToSquare = faPenToSquare;
-  faTrash = faTrash;
-  faCheck = faCheck;
-  faX = faX;
-  faPaperPlane = faPaperPlane;
-  faCopy = faCopy;
 
 }

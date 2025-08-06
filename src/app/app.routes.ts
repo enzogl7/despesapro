@@ -8,6 +8,7 @@ import { Colaboradores } from './colaboradores/colaboradores';
 import { Gestor } from './layouts/gestor/gestor'
 import { Viagens } from './viagens/viagens';
 import { AceitarConvite } from './aceitar-convite/aceitar-convite';
+import { canActivateAuth, canMatchAuth } from './guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: Landingpage },
@@ -18,6 +19,8 @@ export const routes: Routes = [
   {
     path: 'gestor',
     component: Gestor,
+    canMatch: [canMatchAuth],
+    canActivate: [canActivateAuth],
     children: [
       { path: 'home', component: HomeGestor },
       { path: 'colaboradores', component: Colaboradores },
@@ -27,9 +30,16 @@ export const routes: Routes = [
 
   {
     path: 'colab',
+    canMatch: [canMatchAuth],
+    canActivate: [canActivateAuth],
     children: [
       { path: 'home', component: HomeColaborador}
     ]
+  },
+
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
