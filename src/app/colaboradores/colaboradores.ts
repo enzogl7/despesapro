@@ -8,6 +8,19 @@ import { ColaboradoresService, ConviteRequest } from '../services/colaboradores-
 import { environment } from '../../environments/environment.development';
 import { initTooltips } from 'flowbite';
 
+export interface Colaborador {
+  id: string;
+  usuario: {
+    id: string
+    nome: string;
+    email: string;
+  };
+  criadoEm: string;
+  cargo: string;
+  telefone: string;
+  ativo: boolean;
+}
+
 @Component({
   selector: 'app-colaboradores',
   imports: [FontAwesomeModule, ReactiveFormsModule, CommonModule],
@@ -20,6 +33,8 @@ export class Colaboradores implements AfterViewInit {
   warn: boolean = false;
   erroInterno: boolean = false;
   mensagemWarn: string = "";
+  colaboradores: Colaborador[] = [];
+
   faUsers = faUsers;
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
@@ -30,6 +45,7 @@ export class Colaboradores implements AfterViewInit {
   
   ngAfterViewInit() {
     initTooltips();
+    this.listarColaboradores();
   }
 
   constructor(private fb: FormBuilder, private colaboradoresService: ColaboradoresService) {
@@ -87,5 +103,16 @@ export class Colaboradores implements AfterViewInit {
     });
   }
 
+  listarColaboradores() {
+    this.colaboradoresService.listarColaboradoresPorGestor().subscribe({
+      next: (response) => {
+        this.colaboradores = response;
+        console.log(this.colaboradores);
+      },
+      error: (erro) => {
+        console.log(erro);
+      }
+    });
+  }
 
 }

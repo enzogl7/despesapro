@@ -32,8 +32,8 @@ export class Login {
       localStorage.removeItem("token")
       this.authService.logar(dados).subscribe({
         next: (response) => {
+          localStorage.setItem('token', response.token);
           if (response.role === 'ADMIN') {
-            localStorage.setItem('token', response.token);
             this.router.navigate(['/gestor/home']);
           } else {
             this.router.navigate(['/colab/home']);

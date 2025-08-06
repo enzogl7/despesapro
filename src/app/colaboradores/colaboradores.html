@@ -13,79 +13,59 @@
 <hr class="mt-2 border-t border-gray-400" />
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100 ">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    Nome
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Cargo
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Telefone
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Data de criação
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Ativo
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Ações
-                </th>
+                <th scope="col" class="px-6 py-3">Nome</th>
+                <th scope="col" class="px-6 py-3">Email</th>
+                <th scope="col" class="px-6 py-3">Cargo</th>
+                <th scope="col" class="px-6 py-3">Telefone</th>
+                <th scope="col" class="px-6 py-3">Data de criação</th>
+                <th scope="col" class="px-6 py-3">Ativo</th>
+                <th scope="col" class="px-6 py-3">Ações</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-gray-250 border-b border-gray-200">
+                <tr *ngFor="let colab of colaboradores; let isOdd = odd" [ngClass]="{'bg-white hover:bg-gray-50': !isOdd, 'bg-gray-100 hover:bg-gray-200': isOdd }">
+                
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    Wallace Lima
+                    {{ colab.usuario.nome }}
                 </th>
+
                 <td class="px-6 py-4">
-                    wallace@email.com
+                    {{ colab.usuario.email }}
                 </td>
+
                 <td class="px-6 py-4">
-                    Analista de Sistemas
+                    {{ colab.cargo }}
                 </td>
+
                 <td class="px-6 py-4">
-                    (16) 1234-5678
+                    {{ colab.telefone }}
                 </td>
+
                 <td class="px-6 py-4">
-                   01/08/2025
+                    {{ colab.criadoEm | date:'dd/MM/yyyy' }}
                 </td>
+
                 <td class="px-6 py-4 text-xl">
-                    <fa-icon class="mr-3 text-green-600" aria-hidden="true" [icon]="faCheck"></fa-icon>
+                    <fa-icon *ngIf="colab.ativo" class="text-green-600" aria-hidden="true" [icon]="faCheck"></fa-icon>
+                    <fa-icon *ngIf="!colab.ativo" class="text-red-600" aria-hidden="true" [icon]="faX"></fa-icon>
                 </td>
-                <td class="px-6 py-4  text-xl">
-                    <fa-icon class="mr-3 text-blue-950" aria-hidden="true" [icon]="faPenToSquare"></fa-icon>
-                    <fa-icon class="text-red-800" aria-hidden="true" [icon]="faTrash"></fa-icon>
+
+                <td class="px-6 py-4 text-xl">
+                    <button class="mr-3 text-blue-950">
+                        <fa-icon aria-hidden="true" [icon]="faPenToSquare"></fa-icon>
+                    </button>
+                    <button class="text-red-800">
+                        <fa-icon aria-hidden="true" [icon]="faTrash"></fa-icon>
+                    </button>
                 </td>
             </tr>
-            <tr class="bg-gray-100 border-b border-gray-200">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    Enzo Lima
-                </th>
-                <td class="px-6 py-4">
-                    enzo@email.com
-                </td>
-                <td class="px-6 py-4">
-                    Desenvolvedor
-                </td>
-                <td class="px-6 py-4">
-                    (16) 4321-8765
-                </td>
-                <td class="px-6 py-4">
-                   04/08/2025
-                </td>                
-                <td class="px-6 py-4 text-xl">
-                    <fa-icon class="mr-3 text-red-600" aria-hidden="true" [icon]="faX"></fa-icon>
-                </td>
-                <td class="px-6 py-4  text-xl">
-                    <fa-icon class="mr-3 text-blue-950" aria-hidden="true" [icon]="faPenToSquare"></fa-icon>
-                    <fa-icon class="text-red-800" aria-hidden="true" [icon]="faTrash"></fa-icon>
+
+            <tr *ngIf="colaboradores.length === 0">
+                <td [attr.colspan]="7" class="px-6 py-4 text-center text-gray-500">
+                    Nenhum colaborador encontrado.
                 </td>
             </tr>
         </tbody>
