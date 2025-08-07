@@ -8,6 +8,8 @@ Visite o backend do projeto <a href="https://github.com/enzogl7/despesapro-api">
 
 ---
 
+![DespesaPro](public/gif-d2.gif)
+
 ## Sobre
 O DespesaPro oferece recursos que otimizam sua operação e garantem economia com transparência:
 - Solicitação de Viagens: Permita que colaboradores solicitem viagens com apenas alguns cliques e inicie o fluxo de aprovação automático.
