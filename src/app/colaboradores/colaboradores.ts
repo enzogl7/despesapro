@@ -1,12 +1,12 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { faUsers, faPenToSquare, faTrash, faCheck, faX, faPaperPlane, faCopy } from '@fortawesome/free-solid-svg-icons';
+import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { faUsers, faPenToSquare, faTrash, faCheck, faX, faPaperPlane, faCopy, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ColaboradoresService, ConviteRequest } from '../services/colaboradores-service';
 import { environment } from '../../environments/environment.development';
-import { initTooltips } from 'flowbite';
+import { initTooltips, ModalInterface } from 'flowbite';
 
 export interface Colaborador {
   id: string;
@@ -23,7 +23,7 @@ export interface Colaborador {
 
 @Component({
   selector: 'app-colaboradores',
-  imports: [FontAwesomeModule, ReactiveFormsModule, CommonModule],
+  imports: [FontAwesomeModule, ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './colaboradores.html',
   styleUrl: './colaboradores.css'
 })
@@ -32,8 +32,24 @@ export class Colaboradores implements AfterViewInit {
   convite: string = "";
   warn: boolean = false;
   erroInterno: boolean = false;
+  sucessoEdicao: boolean = false;
   mensagemWarn: string = "";
+  mensagemSucesso: string = ""
   colaboradores: Colaborador[] = [];
+  modalEditar: ModalInterface | undefined;
+
+  colaboradorSelecionado: Colaborador = {
+    id: '',
+    usuario: {
+      id: '',
+      nome: '',
+      email: ''
+    },
+    criadoEm: '',
+    cargo: '',
+    telefone: '',
+    ativo: false
+  };
 
   faUsers = faUsers;
   faPenToSquare = faPenToSquare;
@@ -42,13 +58,22 @@ export class Colaboradores implements AfterViewInit {
   faX = faX;
   faPaperPlane = faPaperPlane;
   faCopy = faCopy;
-  
+  faSave = faSave
+
   ngAfterViewInit() {
-    initTooltips();
+    let sucesso: string | null = "";
+    if (isPlatformBrowser(this.platformId)) {
+      initTooltips();
+      sucesso = localStorage.getItem('sucessoEdicao');
+    }
     this.listarColaboradores();
+    if (sucesso === 'true') {
+      this.sucessoEdicao = true;
+      localStorage.removeItem('sucessoEdicao');
+    }
   }
 
-  constructor(private fb: FormBuilder, private colaboradoresService: ColaboradoresService) {
+  constructor(private fb: FormBuilder, private colaboradoresService: ColaboradoresService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.form = this.fb.group({
       emailGestor: ['', [Validators.required, Validators.email]],
       emailColaborador: ['', [Validators.required, Validators.email]],
@@ -107,10 +132,37 @@ export class Colaboradores implements AfterViewInit {
     this.colaboradoresService.listarColaboradoresPorGestor().subscribe({
       next: (response) => {
         this.colaboradores = response;
-        console.log(this.colaboradores);
       },
       error: (erro) => {
         console.log(erro);
+      }
+    });
+  }
+
+  abrirModal(colab : Colaborador) {
+    this.colaboradorSelecionado = {... colab};
+  }
+
+  salvarEdicao() {
+    this.colaboradoresService.salvarEdicaoColaborador(this.colaboradorSelecionado).subscribe({
+      next: (response) => {
+        localStorage.setItem('sucessoEdicao', 'true');
+        location.reload();
+      },
+      error: (erro) => {
+        console.log(erro)
+      }
+    });
+  }
+
+  removerColaborador() {
+    this.colaboradoresService.removerColaborador(this.colaboradorSelecionado.id).subscribe({
+      next: (response) => {
+        localStorage.setItem('sucessoEdicao', 'true');
+        location.reload();
+      },
+      error: (erro) => {
+        console.log(erro)
       }
     });
   }

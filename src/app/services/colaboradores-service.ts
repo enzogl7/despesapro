@@ -26,5 +26,13 @@ export class ColaboradoresService {
     return this.http.get<Colaborador[]>(`${this.API_URL}/listar-por-gestor`);
   }
 
+  salvarEdicaoColaborador(colaborador: Colaborador) : Observable<any> {
+    return this.http.put<any>(`${this.API_URL}/editar`, colaborador)
+  }
+
+  removerColaborador(idColaborador: string) : Observable<any> {
+    return this.http.put<any>(`${this.API_URL}/remover/${encodeURIComponent(idColaborador)}`, null);
+  }
+
   
 }
